@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import kotlin.concurrent.thread
 
 class MyService : Service() {
 
@@ -51,11 +52,14 @@ class MyService : Service() {
             .setContentIntent(pi)
             .build()
         startForeground(1, notification)
-
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d("MyService", "onStartCommand: 执行")
+        thread {
+            // 处理具体逻辑
+            Log.d("MyService", "onStartCommand: 执行")
+            stopSelf()
+        }
         return super.onStartCommand(intent, flags, startId)
     }
 

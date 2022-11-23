@@ -45,5 +45,11 @@ class MainActivity : AppCompatActivity() {
         unbindServiceBtn.setOnClickListener {
             unbindService(connection)
         }
+        startIntentServiceBtn.setOnClickListener {
+            // 打印主线程的id
+            Log.d("MainActivity", "Thread id is ${Thread.currentThread().name}")
+            val intent = Intent(this, MyIntentService::class.java)
+            startService(intent)
+        }
     }
 }
